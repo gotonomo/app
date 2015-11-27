@@ -1,9 +1,0 @@
-
-$(function(){
-	$("button").click(function(){
-		txt=$("#psw").val();
-		result=$.md5(txt);  
-		$("#r").text(result);
-alert("Text: " + $("#userNumber").val());	
-	})
-});
