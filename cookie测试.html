@@ -7,10 +7,10 @@
 <script src="js-cookie-master\src\js.cookie.js"></script>
 <script src="jquery.md5.js"></script>
 <script>
-Cookies.set('name', 'value', { secure: true });
-nameone=Cookies.get('name'); // => 'value'
-console.log(nameone);
-Cookies.remove('name', { secure: true });
+Cookies.set('name', 'abcd');
+nameone=Cookies.get('name');
+alert(nameone);
+Cookies.remove('name');
 </script>
 </head>
 <body>
