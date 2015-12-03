@@ -40,6 +40,7 @@ $.post("http://202.116.161.73:6391/query/Sys_GetSystemTime",
     },//回调函数
     function(data,status){
       //判断登入是否成功
+      alert(data.result);
       if(data.result.length>29){
 	alert("Session：" + data.result + "\n状态：" + status);//弹出获取到的session
       sessionStorage.setItem("sess",data.result);  //存session

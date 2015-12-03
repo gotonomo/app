@@ -5,29 +5,54 @@
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 <script>
-$(document).ready(function(){
-   $(".back").click(function(){window.location.href="main.html";}) 
 
-/*
+//判断是否已登录
+  if(sessionStorage.getItem("sess").length<29){
+  //判断是否已存账号密码
+  if(localStorage.getItem("log")=="access"){
+    //post账号、密码到JSON接口
+    $.post("http://202.116.161.73:6391/query/Sys_UserLogin",
+      {//参数
+        strUserNumber:localStorage.getItem("number"),
+        strPassWordMd5:localStorage.getItem("psw"),
+        strCurrentDate:localStorage.getItem("date"),
+      },//回调函数
+      function(data,status){
+        alert("Session：" + data.result + "\n状态：" + status);//弹出获取到的session
+	//判断登入是否成功
+        if(data.result.length>29){
+        sessionStorage.setItem("sess",data.result)};//存session
+      }
+    )
+  }else{window.location.href="login.html";}
+  }
+//点击后的事件
 $(document).on("pageinit",function(){
+//将数据POST到JSON接口
 $.post("http://202.116.161.73:6391/query/Sys_GetMyCourseDetail",
     {//参数
       strUserNumber:localStorage.getItem("number"),
       strSession:sessionStorage.getItem("sess")
     },//回调函数
     function(data,status)
-    {
-        leng=data.result.length;
+    {//显示数据
+        leng=data.result.length;//获取result数组长度
+	for(i=0;i<leng;i++){
+	  $("#two").append(
+	    '<div class="ui-block-a";style="border:1px solid black;"><span><center>'+data.result[i][0]+'</center></span></div>'+
+	    '<div class="ui-block-b";style="border:1px solid black;"><span><center>'+data.result[i][1]+'</center></span></div>'+
+	    '<div class="ui-block-c";style="border:1px solid black;"><span><center>'+data.result[i][2]+'</center></span></div>'+
+	    '<div class="ui-block-d";style="border:1px solid black;"><span><center>'+data.result[i][3]+'</center></span></div>'+
+	    '<div class="ui-block-e";style="border:1px solid black;"><span><center>'+data.result[i][4]+'</center></span></div>'
+	  );
+	}
 	
     }
       //返回类型
 	,"json");
-})*/
-for(i=0;i<5;i++){
-     $("#two").append('<div class="ui-block-a;style="border: 1px solid black;"><span>Some Text</span></div>');
-     $("#two").append("<div class='ui-block-b;style='border: 1px solid black;'><span>Some Text</span></div>");
-
-}
+})
+$(document).ready(function(){
+   $(".back").click(function(){window.location.href="main.html";}) 
 })
 </script>
 </head>
@@ -49,7 +74,7 @@ for(i=0;i<5;i++){
        <div class="ui-block-e" style="border: 2px solid black;"><span><center>更新时间</center></span></div>
      </div>
    </div>
-   <div data-role="content" data-theme="e" >
+   <div data-role="content" data-theme="a" >
      <div class="ui-grid-d" id="two">
      </div>
    </div>
