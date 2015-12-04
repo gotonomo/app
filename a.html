@@ -1,58 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 <script>
-
-//ÅĞ¶ÏÊÇ·ñÒÑµÇÂ¼
-  if(sessionStorage.getItem("sess").length<29){
-  //ÅĞ¶ÏÊÇ·ñÒÑ´æÕËºÅÃÜÂë
-  if(localStorage.getItem("log")=="access"){
-    //postÕËºÅ¡¢ÃÜÂëµ½JSON½Ó¿Ú
-    $.post("http://202.116.161.73:6391/query/Sys_UserLogin",
-      {//²ÎÊı
-        strUserNumber:localStorage.getItem("number"),
-        strPassWordMd5:localStorage.getItem("psw"),
-        strCurrentDate:localStorage.getItem("date"),
-      },//»Øµ÷º¯Êı
-      function(data,status){
-        alert("Session£º" + data.result + "\n×´Ì¬£º" + status);//µ¯³ö»ñÈ¡µ½µÄsession
-	//ÅĞ¶ÏµÇÈëÊÇ·ñ³É¹¦
-        if(data.result.length>29){
-        sessionStorage.setItem("sess",data.result)};//´æsession
-      }
-    )
-  }else{window.location.href="login.html";}
-  }
-//µã»÷ºóµÄÊÂ¼ş
-$(document).on("pageinit",function(){
-//½«Êı¾İPOSTµ½JSON½Ó¿Ú
-$.post("http://202.116.161.73:6391/query/Sys_GetMyCourseDetail",
-    {//²ÎÊı
-      strUserNumber:localStorage.getItem("number"),
-      strSession:sessionStorage.getItem("sess")
-    },//»Øµ÷º¯Êı
-    function(data,status)
-    {//ÏÔÊ¾Êı¾İ
-        leng=data.result.length;//»ñÈ¡resultÊı×é³¤¶È
-	for(i=0;i<leng;i++){
-	  $("#two").append(
-	    '<div class="ui-block-a";style="border:1px solid black;"><span><center>'+data.result[i][0]+'</center></span></div>'+
-	    '<div class="ui-block-b";style="border:1px solid black;"><span><center>'+data.result[i][1]+'</center></span></div>'+
-	    '<div class="ui-block-c";style="border:1px solid black;"><span><center>'+data.result[i][2]+'</center></span></div>'+
-	    '<div class="ui-block-d";style="border:1px solid black;"><span><center>'+data.result[i][3]+'</center></span></div>'+
-	    '<div class="ui-block-e";style="border:1px solid black;"><span><center>'+data.result[i][4]+'</center></span></div>'
-	  );
-	}
+//åˆ¤æ–­æ˜¯å¦å·²ç™»å½•
+if(sessionStorage.getItem("sess").length<29){
+//åˆ¤æ–­æ˜¯å¦å·²å­˜è´¦å·å¯†ç 
+	if(localStorage.getItem("log")=="access"){
+    //postè´¦å·ã€å¯†ç åˆ°JSONæ¥å£
+    	$.post(
+			"http://202.116.161.73:6391/query/Sys_UserLogin",
+      		{//å‚æ•°
+        		strUserNumber:localStorage.getItem("number"),
+        		strPassWordMd5:localStorage.getItem("psw"),
+        		strCurrentDate:localStorage.getItem("date"),
+      		},//å›è°ƒå‡½æ•°
+      		function(data,status){
+        		alert("Sessionï¼š" + data.result + "\nçŠ¶æ€ï¼š" + status);//å¼¹å‡ºè·å–åˆ°çš„session
+				//åˆ¤æ–­ç™»å…¥æ˜¯å¦æˆåŠŸ
+        		if(data.result.length>29){
+        		sessionStorage.setItem("sess",data.result)};//å­˜session
+      		}
+    	)
+  	}else{window.location.href="login.html";}
+}
 	
-    }
-      //·µ»ØÀàĞÍ
-	,"json");
+//ç‚¹å‡»åçš„äº‹ä»¶
+$(document).on("pageinit",function(){
+	//å°†æ•°æ®POSTåˆ°JSONæ¥å£
+	$.post(
+		"http://202.116.161.73:6391/query/Sys_GetMyCourseDetail",
+    	{//å‚æ•°
+      		strUserNumber:localStorage.getItem("number"),
+      		strSession:sessionStorage.getItem("sess")
+    	},//å›è°ƒå‡½æ•°
+    	function(data,status){//æ˜¾ç¤ºæ•°æ®
+        	leng=data.result.length;//è·å–resultæ•°ç»„é•¿åº¦
+			for(i=0;i<leng;i++){
+		  		$("#table-courses-body").append(
+					'<tr><th>'+data.result[i][0]+'</th>'+
+					'<td>'+data.result[i][1]+'</td>'+
+					'<td>'+data.result[i][2]+'</td>'+
+					'<td>'+data.result[i][3]+'</td>'+
+					'<td>'+data.result[i][4]+'</td></tr>'
+		 		 );
+			}
+    	}
+      	//è¿”å›ç±»å‹
+		,"json"
+	);
 })
+
 $(document).ready(function(){
-   $(".back").click(function(){window.location.href="main.html";}) 
+	$(".back").click(function(){window.location.href="main.html";}) 
 })
 </script>
 </head>
@@ -60,25 +63,22 @@ $(document).ready(function(){
 
 <div data-role="page" id="pageone" data-theme="b">
   <div data-role="header" data-position="fixed">
-    <a href="#" data-role="button" data-icon="back" data-iconpos="notext" class="back">ºóÍË</a>
-    <h1>ËùÑ¡¿Î³ÌÁĞ±í</h1>
-    <a href="#" data-role="button" data-icon="gear" data-iconpos="notext">ÉèÖÃ</a>
+    <a href="#" data-role="button" data-icon="back" data-iconpos="notext" class="back">åé€€</a>
+    <h1>æ‰€é€‰è¯¾ç¨‹åˆ—è¡¨</h1>
+    <a href="#" data-role="button" data-icon="gear" data-iconpos="notext">è®¾ç½®</a>
   </div>
-
-   <div data-role="content" data-theme="a">
-     <div class="ui-grid-d">
-       <div class="ui-block-a" style="border: 2px solid black;"><span><center>¿Î³Ì±àºÅ</center></span></div>
-       <div class="ui-block-b" style="border: 2px solid black;"><span><center>¿Î³ÌÈ«³Ì</center></span></div>
-       <div class="ui-block-c" style="border: 2px solid black;"><span><center>ÈÎ¿ÎÀÏÊ¦</center></span></div>
-       <div class="ui-block-d" style="border: 2px solid black;"><span><center>¿Î³ÌÍ¨Öª</center></span></div>
-       <div class="ui-block-e" style="border: 2px solid black;"><span><center>¸üĞÂÊ±¼ä</center></span></div>
-     </div>
-   </div>
-   <div data-role="content" data-theme="a" >
-     <div class="ui-grid-d" id="two">
-     </div>
-   </div>
-
+	<table data-role="table" id="table-courses" data-mode="reflow" class="ui-responsive table-stroke">
+Â Â Â Â 	<thead>
+			<tr>
+Â Â Â Â Â Â Â Â Â 		<th data-priority="2">è¯¾ç¨‹ç¼–å·</th>
+Â Â Â Â Â Â Â Â Â 		<th>è¯¾ç¨‹å…¨ç¨‹</th>
+Â Â Â Â Â Â Â Â Â 		<th data-priority="1">ä»»è¯¾è€å¸ˆ</th>
+Â Â Â Â Â Â Â Â Â 		<th data-priority="3">è¯¾ç¨‹é€šçŸ¥</th>
+Â Â Â Â Â Â Â Â Â 		<th data-priority="4">æ›´æ–°æ—¶é—´</th>
+Â Â Â Â Â Â Â 		</tr>
+Â Â Â Â Â 	</thead>
+Â Â Â Â Â 	<tbody id="table-courses-body"></tbody>
+	</table>
   <div data-role="footer" data-theme="c">
     <h1>END</h1>
   </div> 
