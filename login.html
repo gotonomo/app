@@ -36,7 +36,7 @@ $.post("http://202.116.161.73:6391/query/Sys_GetSystemTime",
     {//参数
       strUserNumber:strNumber,
       strPassWordMd5:pswd,
-      strCurrentDate:strTime
+      strCurrentDate:localStorage.getItem("date")
     },//回调函数
     function(data,status){
       //判断登入是否成功

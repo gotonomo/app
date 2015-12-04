@@ -8,16 +8,44 @@
 $(document).ready(function(){
    $(".back").click(function(){window.location.href="main.html";}) 
 })
-
 $(document).on("pageinit",function(){
+//判断是否已登录
+  if(sessionStorage.getItem("sess").length<29){
+  //判断是否已存账号密码
+  if(localStorage.getItem("log")=="access"){
+    //post账号、密码到JSON接口
+    $.post("http://202.116.161.73:6391/query/Sys_UserLogin",
+      {//参数
+        strUserNumber:localStorage.getItem("number"),
+        strPassWordMd5:localStorage.getItem("psw"),
+        strCurrentDate:localStorage.getItem("date"),
+      },//回调函数
+      function(data,status){
+        alert("Session：" + data.result + "\n状态：" + status);//弹出获取到的session
+	//判断登入是否成功
+        if(data.result.length>29){
+        sessionStorage.setItem("sess",data.result)};//存session
+      }
+    )
+  }else{window.location.href="login.html";}
+  }
 $.post("http://202.116.161.73:6391/query/Sys_GetMyCourseIDs",
     {//参数
-      strUserNumber:"201230030127",
-      strSession:"2012300301272015112720090803521705"
+      strUserNumber:localStorage.getItem("number"),
+      strSession:sessionStorage.getItem("sess")
     },//回调函数
     function(data,status)
     {
-        $("p1").text(data.result);
+        leng=data.result.length;//获取result数组长度
+	for(i=0;i<leng;i++){
+	  $("ul").append(
+	    '<li><a href="#" id="a'
+	    +i+
+	    '"><h2><center>'
+	    +data.result[i]+
+	    '</center></h2></a></li>'
+	  );
+	}
     }
       //返回类型
 	,"json");
@@ -29,41 +57,29 @@ $.post("http://202.116.161.73:6391/query/Sys_GetMyCourseIDs",
 <div data-role="page" id="pageone" data-theme="b">
   <div data-role="header" data-position="fixed">
     <a href="#" data-role="button" data-icon="back" data-iconpos="notext" class="back">后退</a>
-    <h1>所选课程列表</h1>
+    <h1>课程ID列表</h1>
     <a href="#" data-role="button" data-icon="gear" data-iconpos="notext">设置</a>
   </div>
 
-  <div data-role="content" data-theme="a">
-    <p1>本例设有 ui-btn-active 类，请注意首页按钮时突出显示的（已选）。</p1>
-    <p>请点击页面二按钮，看看会发生什么。ONE</p>
+  <div data-role="content" >
+    <ul data-role="listview" data-inset="true">
+      <li>
+	<a href="#" id="b0">
+	<h2><center>课程列表</center></h2>
+	</a>
+      </li>
+      <li>
+        <a href="#" id="b1">
+        <h2><center>课程ID列表</center></h2>
+        </a>
+      </li>
+    </ul>
   </div>
-
-  
 
   <div data-role="footer" data-theme="c">
     <h1>END</h1>
   </div> 
 </div> 
-
-<div data-role="page" id="pagetwo" data-theme="b">
-  <div data-role="header" data-position="fixed">
-    <a href="#pageone" data-role="button" data-icon="back" data-iconpos="notext">后退</a>
-    <h1>所选课程列表</h1>
-    <a href="#" data-role="button" data-icon="gear" data-iconpos="notext">设置</a>
-  </div>
-
-  <div data-role="content" data-theme="a">
-    <p1>本例设有 ui-btn-active 类，请注意首页按钮时突出显示的（已选）。</p1>
-    <p>请点击页面二按钮，看看会发生什么。TWO</p>
-  </div>
-
-  
-
-  <div data-role="footer" data-theme="c">
-    <h1>END</h1>
-  </div> 
-</div> 
-
 </body>
 </html>
 
