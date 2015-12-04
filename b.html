@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>	
 	<meta charset="UTF-8">
@@ -23,6 +23,7 @@ $.post("http://202.116.161.73:6391/query/Sys_GetMyCourseIDs",
 			$("ul").append(
 			'<li><a href="#" id="a'+i+'"><h2><center>'+data.result[i]+'</center></h2></a></li>'
 		)}
+	$("ul").listview( "refresh" );
 	}
       //返回类型
 	,"json");
