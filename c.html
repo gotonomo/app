@@ -1,26 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 <script>
+//åˆ¤æ–­æ˜¯å¦å·²ç™»å½•
+if(sessionStorage.getItem("sess").length<29){
+//åˆ¤æ–­æ˜¯å¦å·²å­˜è´¦å·å¯†ç 
+	if(localStorage.getItem("log")=="access"){
+    //postè´¦å·ã€å¯†ç åˆ°JSONæ¥å£
+    	$.post(
+			"http://202.116.161.73:6391/query/Sys_UserLogin",
+      		{//å‚æ•°
+        		strUserNumber:localStorage.getItem("number"),
+        		strPassWordMd5:localStorage.getItem("psw"),
+        		strCurrentDate:localStorage.getItem("date"),
+      		},//å›è°ƒå‡½æ•°
+      		function(data,status){
+        		alert("Sessionï¼š" + data.result + "\nçŠ¶æ€ï¼š" + status);//å¼¹å‡ºè·å–åˆ°çš„session
+				//åˆ¤æ–­ç™»å…¥æ˜¯å¦æˆåŠŸ
+        		if(data.result.length>29){
+        		sessionStorage.setItem("sess",data.result)};//å­˜session
+      		}
+    	)
+  	}else{window.location.href="login.html";}
+}
+//åŠ è½½é¡µé¢åçš„ç‚¹å‡»åé€€äº‹ä»¶
 $(document).ready(function(){
    $(".back").click(function(){window.location.href="main.html";}) 
 })
 
 $(document).on("pageinit",function(){
-$.post("http://202.116.161.73:6391/query/Sys_GetMyHomeWorkDetails",
-    {//²ÎÊı
-      strUserNumber:"201230030127",
-      strSession:"2012300301272015112720090803521705",
-      courseID:"84"
-    },//»Øµ÷º¯Êı
+$.post("http://202.116.161.73:6391/query/Sys_GetMyHomeWorkIDs",
+    {//å‚æ•°
+      strUserNumber:localStorage.getItem("number"),
+      strSession:sessionStorage.getItem("sess")
+    },//å›è°ƒå‡½æ•°
     function(data,status)
     {
-        $("p1").text(data.result[0][0]);
+    leng=data.result.length;//è·å–resultæ•°ç»„é•¿åº¦
+	for(i=0;i<leng;i++){
+		$("ul").append(
+		'<li><a href="#" id="a'+i+'"><h2><center>'+data.result[i]+'</center></h2></a></li>'
+		)}
+	$("ul").listview( "refresh" );
+	}
     }
-      //·µ»ØÀàĞÍ
+      //è¿”å›ç±»å‹
 	,"json");
 })
 </script>
@@ -29,14 +57,14 @@ $.post("http://202.116.161.73:6391/query/Sys_GetMyHomeWorkDetails",
 
 <div data-role="page" id="pageone" data-theme="b">
   <div data-role="header" data-position="fixed">
-    <a href="#" data-role="button" data-icon="back" data-iconpos="notext" class="back">ºóÍË</a>
-    <h1>ËùÑ¡¿Î³ÌÁĞ±í</h1>
-    <a href="#" data-role="button" data-icon="gear" data-iconpos="notext">ÉèÖÃ</a>
+    <a href="#" data-role="button" data-icon="back" data-iconpos="notext" class="back">åé€€</a>
+    <h1>æ‰€é€‰è¯¾ç¨‹åˆ—è¡¨</h1>
+    <a href="#" data-role="button" data-icon="gear" data-iconpos="notext">è®¾ç½®</a>
   </div>
 
   <div data-role="content" data-theme="a">
-    <p1>±¾ÀıÉèÓĞ ui-btn-active Àà£¬Çë×¢ÒâÊ×Ò³°´Å¥Ê±Í»³öÏÔÊ¾µÄ£¨ÒÑÑ¡£©¡£</p1>
-    <p>Çëµã»÷Ò³Ãæ¶ş°´Å¥£¬¿´¿´»á·¢ÉúÊ²Ã´¡£</p>
+    <p1>æœ¬ä¾‹è®¾æœ‰ ui-btn-active ç±»ï¼Œè¯·æ³¨æ„é¦–é¡µæŒ‰é’®æ—¶çªå‡ºæ˜¾ç¤ºçš„ï¼ˆå·²é€‰ï¼‰ã€‚</p1>
+    <p>è¯·ç‚¹å‡»é¡µé¢äºŒæŒ‰é’®ï¼Œçœ‹çœ‹ä¼šå‘ç”Ÿä»€ä¹ˆã€‚</p>
   </div>
 
   
