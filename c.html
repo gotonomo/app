@@ -27,13 +27,9 @@ if(sessionStorage.getItem("sess").length<29){
     	)
   	}else{window.location.href="login.html";}
 }
-//加载页面后的点击后退事件
-$(document).ready(function(){
-   $(".back").click(function(){window.location.href="main.html";}) 
-})
 
 $(document).on("pageinit",function(){
-$.post("http://202.116.161.73:6391/query/Sys_GetMyHomeWorkIDs",
+$.post("http://202.116.161.73:6391/query/Sys_GetMyHomeWorkDetails",
     {//参数
       strUserNumber:localStorage.getItem("number"),
       strSession:sessionStorage.getItem("sess")
@@ -42,31 +38,57 @@ $.post("http://202.116.161.73:6391/query/Sys_GetMyHomeWorkIDs",
     {
     leng=data.result.length;//获取result数组长度
 	for(i=0;i<leng;i++){
-		$("ul").append(
-		'<li><a href="#" id="a'+i+'"><h2><center>'+data.result[i]+'</center></h2></a></li>'
-		)}
+		  		$("#table-courses-body").append(
+					'<tr><td>'+data.result[i][0]+'</td>'+
+					'<td>'+data.result[i][1]+'</td>'+
+					'<td>'+data.result[i][2]+'</td>'+
+					'<td>'+data.result[i][3]+'</td>'+
+					'<td>'+data.result[i][4]+'</td>'+
+					'<td>'+data.result[i][5]+'</td>'+
+					'<td>'+data.result[i][6]+'</td>'+
+					'<td>'+data.result[i][7]+'</td>'+
+					'<td>'+data.result[i][8]+'</td>'+
+					'<td>'+data.result[i][9]+'</td>'+
+					'<td>'+data.result[i][10]+'</td></tr>'
+				);
+			}
 	$("ul").listview( "refresh" );
 	}
-    }
+    
       //返回类型
 	,"json");
+})//加载页面后的点击后退事件
+$(document).ready(function(){
+	$(".back").click(function(){window.location.href="main.html";}) 
 })
 </script>
 </head>
 <body>
 
-<div data-role="page" id="pageone" data-theme="b">
+<div data-role="page" id="pageone" data-theme="a">
   <div data-role="header" data-position="fixed">
     <a href="#" data-role="button" data-icon="back" data-iconpos="notext" class="back">后退</a>
-    <h1>所选课程列表</h1>
+    <h1>作业列表</h1>
     <a href="#" data-role="button" data-icon="gear" data-iconpos="notext">设置</a>
   </div>
-
-  <div data-role="content" data-theme="a">
-    <p1>本例设有 ui-btn-active 类，请注意首页按钮时突出显示的（已选）。</p1>
-    <p>请点击页面二按钮，看看会发生什么。</p>
-  </div>
-
+	<table data-role="table" id="table-courses" data-mode="reflow" class="ui-responsive table-stroke">
+	    <thead>
+			<tr>
+	         	<th data-priority="2">作业ID号</th>
+	         	<th>课程全称</th>
+	         	<th data-priority="1">作业名称</th>
+	         	<th data-priority="3">作业类型</th>
+	         	<th data-priority="4">在此时间前提交</th>
+	         	<th data-priority="5">提交文件内容</th>
+	         	<th data-priority="10">提交状态</th>
+	         	<th data-priority="6">提交时间</th>
+	         	<th data-priority="7">提交过程轨迹</th>
+	         	<th data-priority="8">自评分数</th>
+	         	<th data-priority="9">自评备注</th>
+	       	</tr>
+	     </thead>
+	     <tbody id="table-courses-body"></tbody>
+	</table>
   
 
   <div data-role="footer" data-theme="c">
