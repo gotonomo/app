@@ -5,23 +5,58 @@
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 <script>
+//判断是否已登录
+if(sessionStorage.getItem("sess").length<29){
+//判断是否已存账号密码
+	if(localStorage.getItem("log")=="access"){
+    //post账号、密码到JSON接口
+    	$.post(
+			"http://202.116.161.73:6391/query/Sys_UserLogin",
+      		{//参数
+        		strUserNumber:localStorage.getItem("number"),
+        		strPassWordMd5:localStorage.getItem("psw"),
+        		strCurrentDate:localStorage.getItem("date"),
+      		},//回调函数
+      		function(data,status){
+        		alert("Session：" + data.result + "\n状态：" + status);//弹出获取到的session
+				//判断登入是否成功
+        		if(data.result.length>29){
+        		sessionStorage.setItem("sess",data.result)};//存session
+      		}
+    	)
+  	}else{window.location.href="login.html";}
+}
+	
 $(document).ready(function(){
    $(".back").click(function(){window.location.href="main.html";}) 
 })
 
-/*$(document).on("pageinit",function(){
-$.post("http://202.116.161.73:6391/query/Sys_GetClassMatesShortNumber",
+$(document).on("pageinit",function(){
+$.post("http://202.116.161.73:6391/query/Ext_Phone_GetMyClassMatesShortNumber",
     {//参数
-      strUserNumber:"201230030127",
-      strSession:"2012300301272015112720090803521705"
+      strUserNumber:localStorage.getItem("number"),
+      		strSession:sessionStorage.getItem("sess")
     },//回调函数
-    function(data,status)
-    {
-        $("p1").text(data.result);
+    function(data,status){//显示数据
+        leng=data.result.length;//获取result数组长度
+		for(i=0;i<leng;i++){
+		  	$("#table-courses-body").append(
+				'<tr><th data-id="'+data.result[i]+'"><a href="#">'+data.result[i]+'</a></th></tr>'
+				//'<td>'+data.result[i][1]+'</td>'
+			);
+		}
+		$("#table-courses-body th").click(function(){
+			courses_test($(this));
+			return false;
+		});
     }
       //返回类型
 	,"json");
-})*/
+})
+
+var courses_test = function(obj){
+	console.log('课程编号是：' + obj.data('id'));
+};
 </script>
 </head>
 <body>
@@ -29,16 +64,19 @@ $.post("http://202.116.161.73:6391/query/Sys_GetClassMatesShortNumber",
 <div data-role="page" id="pageone" data-theme="b">
   <div data-role="header" data-position="fixed">
     <a href="#" data-role="button" data-icon="back" data-iconpos="notext" class="back">后退</a>
-    <h1>所选课程列表</h1>
+    <h1>同班同学短号信息</h1>
     <a href="#" data-role="button" data-icon="gear" data-iconpos="notext">设置</a>
   </div>
 
-  <div data-role="content" data-theme="a">
-    <p1>本例设有 ui-btn-active 类，请注意首页按钮时突出显示的（已选）。</p1>
-    <p>请点击页面二按钮，看看会发生什么。ONE</p>
-  </div>
-
-  
+	<table data-role="table" id="table-courses" data-mode="reflow" class="ui-responsive table-stroke">
+????	<thead>
+			<tr>
+?????????		<th data-priority="1">姓名</th>
+?????????		<th>短号</th>
+???????		</tr>
+?????	</thead>
+?????	<tbody id="table-courses-body"></tbody>
+	</table>
 
   <div data-role="footer" data-theme="c">
     <h1>END</h1>
