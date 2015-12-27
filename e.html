@@ -40,9 +40,10 @@ $.post("http://202.116.161.73:6391/query/Ext_Phone_GetMyClassMatesShortNumber",
     function(data,status){//显示数据
         leng=data.result.length;//获取result数组长度
 		for(i=0;i<leng;i++){
+			strs = data.result[i].split(",");
 		  	$("#table-courses-body").append(
-				'<tr><th data-id="'+data.result[i]+'"><a href="#">'+data.result[i]+'</a></th></tr>'
-				//'<td>'+data.result[i][1]+'</td>'
+				'<tr><td>'+strs[0]+'</td>'+
+				'<th data-id="'+data.result[i]+'"><a href="#">'+strs[1]+'</a></th></tr>'
 			);
 		}
 		$("#table-courses-body th").click(function(){
@@ -69,13 +70,13 @@ var courses_test = function(obj){
   </div>
 
 	<table data-role="table" id="table-courses" data-mode="reflow" class="ui-responsive table-stroke">
-????	<thead>
+		<thead>
 			<tr>
-?????????		<th data-priority="1">姓名</th>
-?????????		<th>短号</th>
-???????		</tr>
-?????	</thead>
-?????	<tbody id="table-courses-body"></tbody>
+				<th data-priority="1">姓名</th>
+				<th>短号</th>
+			</tr>
+		</thead>
+		<tbody id="table-courses-body"></tbody>
 	</table>
 
   <div data-role="footer" data-theme="c">

@@ -35,6 +35,7 @@ $(document).on("pageinit",function(){
       		function(data,status){
         		alert("Session：" + data.result + "\n状态：" + status);//弹出获取到的session
 				//判断登入是否成功
+				if(data.result=="406"){window.location.href="main.html";}
         		if(data.result.length>29){
         			sessionStorage.setItem("sess",data.result)
 				};//存session

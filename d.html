@@ -53,8 +53,9 @@ $.post("http://202.116.161.73:6391/query/Sys_GetMyHomeWorkIDs",
       //返回类型
 	,"json");
 })
-var courses_test = function(obj){console.log('作业编号是：' + obj.data('id'));
-	if(sessionStorage.setItem("woid",obj.data('id')))//存课程编号编号
+var courses_test = function(obj){
+	console.log('作业编号是：' + obj.data('id'));
+	sessionStorage.setItem("woid",obj.data('id'));//存课程编号编号
 	window.location.href="d2.html";
 };
 </script>

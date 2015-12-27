@@ -57,9 +57,9 @@ $.post("http://202.116.161.73:6391/query/Sys_GetMyCourseIDs",
 	,"json");
 })
 var courses_test = function(obj){
-	if(sessionStorage.setItem("coid",obj.data('id'))){//存课程编号
+	sessionStorage.setItem("coid",obj.data('id'))//存课程编号
 	console.log('课程编号是：' + obj.data('id'));
-	window.location.href="b2.html";}
+	window.location.href="b2.html";
 };
 </script>
 </head>

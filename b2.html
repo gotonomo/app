@@ -29,7 +29,7 @@ if(sessionStorage.getItem("sess").length<29){
 }
 
 $(document).ready(function(){
-   $(".back").click(function(){window.location.href="main.html";}) 
+   $(".back").click(function(){window.location.href="b.html";}) 
 })
 
 $(document).on("pageinit",function(){
@@ -38,20 +38,18 @@ $.post("http://202.116.161.73:6391/query/Sys_GetMyCourseDetailByID",
 	  //参数
       strUserNumber:localStorage.getItem("number"),
       strSession:sessionStorage.getItem("sess"),
-	  strSession:sessionStorage.getItem("coid")
+	  courseID:sessionStorage.getItem("coid")
     },
 	//回调函数
     function(data,status)
     {
 		$("#table-courses-body").append(
-			'<tr><th data-id="'+data.result[0]+'"><a href="#">'+data.result[0]+'</a></th>'+
+			'<tr><th data-id="'+data.result[0]+'">'+data.result[0]+'</th>'+
 			'<td>'+data.result[1]+'</td>'+
 			'<td>'+data.result[2]+'</td>'+
 			'<td>'+data.result[3]+'</td>'+
 			'<td>'+data.result[4]+'</td></tr>'
 		);
-			
-	$("ul").listview( "refresh" );
 	}
     //返回类型
 	,"json");
@@ -67,25 +65,23 @@ $.post("http://202.116.161.73:6391/query/Sys_GetMyCourseDetailByID",
 		<a href="#" data-role="button" data-icon="gear" data-iconpos="notext">设置</a>
 	  </div>
 	  <!--存放获取到的ID列表-->
-	  </div>
-	<table data-role="table" id="table-courses" data-mode="reflow" class="ui-responsive table-stroke">
-    	<thead>
-			<tr>
-         		<th data-priority="2">课程编号</th>
-         		<th>课程全称</th>
-         		<th data-priority="1">任课老师</th>
-         		<th data-priority="3">课程通知</th>
-         		<th data-priority="4">更新时间</th>
-       		</tr>
-     	</thead>
-     	<tbody id="table-courses-body"></tbody>
-	</table>
+		<table data-role="table" id="table-courses" data-mode="reflow" class="ui-responsive table-stroke">
+	    	<thead>
+				<tr>
+	         		<th data-priority="2">课程编号</th>
+	         		<th>课程全称</th>
+	         		<th data-priority="1">任课老师</th>
+	         		<th data-priority="3">课程通知</th>
+	         		<th data-priority="4">更新时间</th>
+	       		</tr>
+	     	</thead>
+	     	<tbody id="table-courses-body"></tbody>
+		</table>
 	  <!--页尾-->
 	  <div data-role="footer" data-theme="c">
 		<h1>END</h1>
 	  </div> 
 	</div> 
-
 </body>
 </html>
 
