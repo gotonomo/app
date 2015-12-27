@@ -5,23 +5,23 @@
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 <script>
-//ÅĞ¶ÏÊÇ·ñÒÑµÇÂ¼
+//åˆ¤æ–­æ˜¯å¦å·²ç™»å½•
 if(sessionStorage.getItem("sess").length<29){
-//ÅĞ¶ÏÊÇ·ñÒÑ´æÕËºÅÃÜÂë
+//åˆ¤æ–­æ˜¯å¦å·²å­˜è´¦å·å¯†ç 
 	if(localStorage.getItem("log")=="access"){
-    //postÕËºÅ¡¢ÃÜÂëµ½JSON½Ó¿Ú
+    //postè´¦å·ã€å¯†ç åˆ°JSONæ¥å£
     	$.post(
 			"http://202.116.161.73:6391/query/Sys_UserLogin",
-      		{//²ÎÊı
+      		{//å‚æ•°
         		strUserNumber:localStorage.getItem("number"),
         		strPassWordMd5:localStorage.getItem("psw"),
         		strCurrentDate:localStorage.getItem("date"),
-      		},//»Øµ÷º¯Êı
+      		},//å›è°ƒå‡½æ•°
       		function(data,status){
-        		alert("Session£º" + data.result + "\n×´Ì¬£º" + status);//µ¯³ö»ñÈ¡µ½µÄsession
-				//ÅĞ¶ÏµÇÈëÊÇ·ñ³É¹¦
+        		alert("Sessionï¼š" + data.result + "\nçŠ¶æ€ï¼š" + status);//å¼¹å‡ºè·å–åˆ°çš„session
+				//åˆ¤æ–­ç™»å…¥æ˜¯å¦æˆåŠŸ
         		if(data.result.length>29){
-        		sessionStorage.setItem("sess",data.result)};//´æsession
+        		sessionStorage.setItem("sess",data.result)};//å­˜session
       		}
     	)
   	}else{window.location.href="login.html";}
@@ -33,15 +33,15 @@ $(document).ready(function(){
 
 $(document).on("pageinit",function(){
 $.post("http://202.116.161.73:6391/query/Ext_LBS_GetMyLastPosition",
-    {//²ÎÊı
+    {//å‚æ•°
       strUserNumber:localStorage.getItem("number"),
       strSession:sessionStorage.getItem("sess")
-    },//»Øµ÷º¯Êı
+    },//å›è°ƒå‡½æ•°
     function(data,status)
     {
         if(data.result == null){
-			alert("ÎŞ¶¨Î»¼ÇÂ¼");
-		}else{leng=data.result.length;//»ñÈ¡resultÊı×é³¤¶È
+			alert("æ— å®šä½è®°å½•");
+		}else{leng=data.result.length;//è·å–resultæ•°ç»„é•¿åº¦
 			for(i=0;i<leng;i++){
 					$("#table-courses-body").append(
 						'<tr><td>'+data.result[i][0]+'</td>'+
@@ -54,7 +54,7 @@ $.post("http://202.116.161.73:6391/query/Ext_LBS_GetMyLastPosition",
 			}
 		}
     }
-      //·µ»ØÀàĞÍ
+      //è¿”å›ç±»å‹
 	,"json");
 })
 </script>
@@ -63,21 +63,21 @@ $.post("http://202.116.161.73:6391/query/Ext_LBS_GetMyLastPosition",
 
 <div data-role="page" id="pageone" data-theme="b">
 	<div data-role="header" data-position="fixed">
-		<a href="#" data-role="button" data-icon="back" data-iconpos="notext" class="back">ºóÍË</a>
-		<h1>Î»ÖÃ¹¦ÄÜ</h1>
-		<a href="#" data-role="button" data-icon="gear" data-iconpos="notext">ÉèÖÃ</a>
+		<a href="#" data-role="button" data-icon="back" data-iconpos="notext" class="back">åé€€</a>
+		<h1>ä½ç½®åŠŸèƒ½</h1>
+		<a href="#" data-role="button" data-icon="gear" data-iconpos="notext">è®¾ç½®</a>
 	</div>	
 	<table data-role="table" id="table-courses" data-mode="reflow" class="ui-responsive table-stroke">
 			<thead>
-				<tr><!--ÎÄ¼ş±êÌâ-->
-					<th data-priority="2">Ñ§ºÅ</th>
-					<th>Ê±¼ä</th>
-					<th data-priority="1">¾­¶È</th>
-					<th data-priority="3">Î³¶È</th>
-					<th data-priority="4">±¸×¢</th>
+				<tr><!--æ–‡ä»¶æ ‡é¢˜-->
+					<th data-priority="2">å­¦å·</th>
+					<th>æ—¶é—´</th>
+					<th data-priority="1">ç»åº¦</th>
+					<th data-priority="3">çº¬åº¦</th>
+					<th data-priority="4">å¤‡æ³¨</th>
 				</tr>
 			</thead>
-			<tbody id="table-courses-body"></tbody><!--ÎÄ¼şÄÚÈİ-->
+			<tbody id="table-courses-body"></tbody><!--æ–‡ä»¶å†…å®¹-->
 	</table>
 
 
