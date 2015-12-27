@@ -1,0 +1,16 @@
+var longtitude = 0;
+var latitude = 0;
+function GetPostion() {
+            //通过百度获取经纬度
+            var address = "具体的地理位置 ";             
+            var url = "http://api.map.baidu.com/geocoder/v2/?address=" + address + "&output=json&ak=FG7wxr1VUj0k2NwoO3yXzymd&callback=?";
+            $.getJSON(url, function (data) {
+                longtitude = data.result.location.lng;
+                latitude = data.result.location.lat;
+            });
+}
+<!---------注意必须引进Jquery脚本 本人用的是jquery-1.5.1.js----------->
+<!----------------最后把经纬度传送给谷歌插件就可以了 如gmap3,url 中的ak=FG7wxr1VUj0k2NwoO3yXzymd  是自己的一个ak号  可以通过百度
+开发者中心免费申请   很方便   这个现在是我的   大家不嫌弃的话就用吧
+----------------->
+
