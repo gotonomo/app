@@ -41,15 +41,16 @@ $.post("http://202.116.161.73:6391/query/Ext_Phone_GetMyClassMatesShortNumber",
         leng=data.result.length;//获取result数组长度
 		for(i=0;i<leng;i++){
 			strs = data.result[i].split(",");
-		  	$("#table-courses-body").append(
-				'<tr><td>'+strs[0]+'</td>'+
-				'<th data-id="'+data.result[i]+'"><a href="#">'+strs[1]+'</a></th></tr>'
+		  	$("#phone").append(
+				'<li data-role="list-divider">'+strs[0]+'</li>'+
+				'<li data-theme="c"><a href="#pagetwo" data-rel="dialog" data-id='+strs[1]+'>'+strs[1]+'</a></li>'
 			);
 		}
-		$("#table-courses-body th").click(function(){
+		$("#phone a").click(function(){
 			courses_test($(this));
 			return false;
 		});
+		$("ul").listview( "refresh" );
     }
       //返回类型
 	,"json");
@@ -69,20 +70,31 @@ var courses_test = function(obj){
     <a href="#" data-role="button" data-icon="gear" data-iconpos="notext">设置</a>
   </div>
 
-	<table data-role="table" id="table-courses" data-mode="reflow" class="ui-responsive table-stroke">
-		<thead>
-			<tr>
-				<th data-priority="1">姓名</th>
-				<th>短号</th>
-			</tr>
-		</thead>
-		<tbody id="table-courses-body"></tbody>
-	</table>
+	<div data-role="content">
+		<ul data-role="listview" id="phone">
+		</ul>
+	</div>
 
   <div data-role="footer" data-theme="c">
     <h1>END</h1>
   </div> 
 </div> 
+
+<div data-role="page" id="pagetwo">
+  <div data-role="header">
+    <h1>我是一个对话框！</h1>
+  </div>
+
+  <div data-role="content">
+    <p>对话框与普通页面不同，它显示在当前页面的顶端。它不会横跨整个页面宽度。对话框页眉中的图标 “X” 可关闭对话框。</p>
+    <a href="#pageone">转到页面一</a>
+  </div>
+
+  <div data-role="footer">
+  <h1>页脚文本</h1>
+  </div>
+</div> 
+
 
 </body>
 </html>
