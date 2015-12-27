@@ -33,7 +33,7 @@ $(document).on("pageinit",function(){
 				strCurrentDate:localStorage.getItem("date"),
       		},//回调函数
       		function(data,status){
-        		alert("Session：" + data.result + "\n状态：" + status);//弹出获取到的session
+        		//alert("Session：" + data.result + "\n状态：" + status);//弹出获取到的session
 				//判断登入是否成功
 				if(data.result=="406"){window.location.href="main.html";}
         		if(data.result.length>29){
@@ -74,8 +74,7 @@ $(document).ready(function(){
   </div>
 
   <div data-role="content" data-theme="a">
-    <p>本例设有 ui-btn-active 类，请注意首页按钮时突出显示的（已选）。</p>
-    <p>请点击页面二按钮，看看会发生什么。</p>
+    <p><center>基础功能列表</center></p>
   </div>
 
   <div data-role="content" >
@@ -122,8 +121,7 @@ $(document).ready(function(){
   </div>
 
   <div data-role="content" data-theme="a">
-    <p>该页面的按钮也会被突出显示，归功于 ui-btn-active 类。</p> 
-    <p>如果返回首页，您会发现页面将保持状态，归功于 ui-state-persist 类。</p>
+    <p><center>扩展功能列表</center></p> 
   </div>
 
 <div data-role="content">

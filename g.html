@@ -29,7 +29,7 @@ if(sessionStorage.getItem("sess").length<29){
 }
 	
 $(document).ready(function(){
-   $(".back").click(function(){window.location.href="main.html";}) 
+   $(".back").click(function(){window.location.href="javascript:history.go(-1);";}) 
 })
 
 $(document).on("pageinit",function(){

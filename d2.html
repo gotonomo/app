@@ -27,9 +27,9 @@ if(sessionStorage.getItem("sess").length<29){
     	)
   	}else{window.location.href="login.html";}
 }
-
+	
 $(document).ready(function(){
-   $(".back").click(function(){window.location.href="d.html";}) 
+   $(".back").click(function(){window.location.href="javascript:history.go(-1);";}) 
 })
 
 $(document).on("pageinit",function(){

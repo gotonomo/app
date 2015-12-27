@@ -41,17 +41,13 @@ $(document).on("pageinit",function(){
         	leng=data.result.length;//获取result数组长度
 			for(i=0;i<leng;i++){
 		  		$("#table-courses-body").append(
-					'<tr><th data-id="'+data.result[i][0]+'"><a href="#">'+data.result[i][0]+'</a></th>'+
+					'<tr><th data-id="'+data.result[i][0]+'">'+data.result[i][0]+'</th>'+
 					'<td>'+data.result[i][1]+'</td>'+
 					'<td>'+data.result[i][2]+'</td>'+
 					'<td>'+data.result[i][3]+'</td>'+
 					'<td>'+data.result[i][4]+'</td></tr>'
 				);
 			}
-			$("#table-courses-body th").click(function(){
-				courses_test($(this));
-				return false;
-			});
     	}
       	//返回类型
 		,"json"
@@ -62,9 +58,6 @@ $(document).ready(function(){
 	$(".back").click(function(){window.location.href="main.html";}) 
 })
 
-var courses_test = function(obj){
-	console.log('课程编号是：' + obj.data('id'));
-};
 </script>
 </head>
 <body>
