@@ -58,6 +58,21 @@ $.post("http://202.116.161.73:6391/query/Ext_LBS_GetMyLastPosition",
       //返回类型
 	,"json");
 })
+
+var x=document.getElementById("demo");
+function getLocation()
+  {
+  if (navigator.geolocation)
+    {
+    navigator.geolocation.getCurrentPosition(showPosition);
+    }
+  else{x.innerHTML="Geolocation is not supported by this browser.";}
+  }
+function showPosition(position)
+  {
+  x.innerHTML="Latitude: " + position.coords.latitude + 
+  "<br />Longitude: " + position.coords.longitude;	
+  }
 </script>
 </head>
 <body>
@@ -81,6 +96,10 @@ $.post("http://202.116.161.73:6391/query/Ext_LBS_GetMyLastPosition",
 			<tbody id="table-courses-body"></tbody><!--文件内容-->
 	</table>
 
+  <div data-role="content" data-theme="a">
+    <center><p id="demo">点击这个按钮，获得您的坐标：</p></center>
+	<button onclick="getLocation()">试一下</button>
+  </div>
 
   <div data-role="footer" data-theme="c">
     <h1>END</h1>
