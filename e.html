@@ -49,7 +49,7 @@ $.post("http://202.116.161.73:6391/query/Ext_Phone_GetMyClassMatesShortNumber",
 		}
 		$("#phone a").click(function(){
 			courses_test($(this));
-			return false;
+			return ture;
 		});
 		$("ul").listview( "refresh" );
     }
@@ -83,11 +83,11 @@ var courses_test = function(obj){
 
 <div data-role="page" id="pagetwo">
   <div data-role="header">
-    <h1>我是一个对话框！</h1>
+    <h1>电话/短信</h1>
   </div>
 
   <div data-role="content">
-    <p>对话框与普通页面不同，它显示在当前页面的顶端。它不会横跨整个页面宽度。对话框页眉中的图标 “X” 可关闭对话框。</p>
+    
     <a href="#pageone">转到页面一</a>
   </div>
 
