@@ -15,7 +15,6 @@ $(document).ready(function(){
 			strUserNumber:"201230030127"
 		},//回调函数
 		function(data,status){
-			//alert("时间：" + data.result + "\n状态：" + status);
 			strTime=data.result;
 			localStorage.setItem("date",strTime);	    //存登录时间
 		}
@@ -30,8 +29,6 @@ $(document).ready(function(){
 		pswd=$.md5(psw); 
 		localStorage.setItem("number",strNumber);	    //存账号
 		localStorage.setItem("psw",pswd);		    //存密码
-		$("#r").text(pswd);//显示密码
-		alert("Text: " + $("#userNumber").val()+strTime);//弹出账号
 		//post账号、密码到JSON接口
 		$.post(
 			"http://202.116.161.73:6391/query/Sys_UserLogin",
@@ -42,12 +39,9 @@ $(document).ready(function(){
 			},//回调函数
 			function(data,status){
 				//判断登入是否成功
-				alert(data.result);
 				if(data.result.length>29){
-					alert("Session：" + data.result + "\n状态：" + status);//弹出获取到的session
 					sessionStorage.setItem("sess",data.result);  //存session
 					localStorage.setItem("log","access");	      //存正确账号密码的标记
-					alert("Session：" + data.result + "\n状态：" + status);//弹出获取到的session
 					window.location.href="main.html";
 				}
 			}//返回类型

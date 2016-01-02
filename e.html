@@ -49,7 +49,7 @@ $.post("http://202.116.161.73:6391/query/Ext_Phone_GetMyClassMatesShortNumber",
 		}
 		$("#phone a").click(function(){
 			courses_test($(this));
-			return ture;
+			return true;
 		});
 		$("ul").listview( "refresh" );
     }
@@ -58,7 +58,16 @@ $.post("http://202.116.161.73:6391/query/Ext_Phone_GetMyClassMatesShortNumber",
 })
 
 var courses_test = function(obj){
-	console.log('课程编号是：' + obj.data('id'));
+	$("#call").empty();
+	console.log('号码是：' + obj.data('id'));
+	sessionStorage.setItem("phone",obj.data('id'));
+	$("#call").append(
+		'<center><a href="tel:'+obj.data('id')+'">拨打号码</a><br><br>'+
+		'<a href="sms:'+obj.data('id')+'">发送短信</a></center>'
+	);
+	$("a").click(function(){
+			console.log('号码是：' + obj.data('id'));
+		});
 };
 </script>
 </head>
@@ -83,17 +92,12 @@ var courses_test = function(obj){
 
 <div data-role="page" id="pagetwo">
   <div data-role="header">
-    <h1>电话/短信</h1>
+    <h1>请选择功能</h1>
   </div>
 
-  <div data-role="content">
-    
-    <a href="#pageone">转到页面一</a>
+  <div data-role="content" id='call'>
   </div>
 
-  <div data-role="footer">
-  <h1>页脚文本</h1>
-  </div>
 </div> 
 
 
