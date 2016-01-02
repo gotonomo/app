@@ -59,14 +59,22 @@ $.post("http://202.116.161.73:6391/query/Ext_LBS_GetMyLastPosition",
 	,"json");
 })
 
-var x=$("#lbs-result");
 function showPosition(position){
-	x.html("纬度: " + position.coords.latitude + "<br />经度: " + position.coords.longitude);	
+	$.mobile.loading( "hide" );
+	$("#lbs-result").html("纬度: " + position.coords.latitude + "<br />经度: " + position.coords.longitude);	
+	//TODO: 上传坐标
 }
 function showError(){
-	x.html(我们在获取坐标时遇到了错误，请重试");
+	$.mobile.loading( "hide" );
+	$("#lbs-result").html("我们在获取坐标时遇到了错误，请重试");
 }
 function getLocation(){
+	$.mobile.loading( "show", {
+        text: "请稍候……",
+        textVisible: true,
+        theme: 'b'
+    });
+	
 	if (navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(showPosition, showError);
     }else showError();
