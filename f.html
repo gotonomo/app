@@ -59,20 +59,23 @@ $.post("http://202.116.161.73:6391/query/Ext_LBS_GetMyLastPosition",
 	,"json");
 })
 
-var x=document.getElementById("demo");
+var x=$("#lbs-result");
 function getLocation()
   {
   if (navigator.geolocation)
     {
-    navigator.geolocation.getCurrentPosition(showPosition);
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
     }
-  else{x.innerHTML="Geolocation is not supported by this browser.";}
+  else showError();
   }
 function showPosition(position)
   {
-  x.innerHTML="Latitude: " + position.coords.latitude + 
-  "<br />Longitude: " + position.coords.longitude;	
+  x.innerHTML="纬度: " + position.coords.latitude + 
+  "<br />经度: " + position.coords.longitude;	
   }
+function showError(){
+	x.innerHTML="我们在获取坐标时遇到了错误，请重试";
+}
 </script>
 </head>
 <body>
@@ -83,7 +86,9 @@ function showPosition(position)
 		<h1>位置功能</h1>
 		<a href="#" data-role="button" data-icon="gear" data-iconpos="notext">设置</a>
 	</div>	
-	<table data-role="table" id="table-courses" data-mode="reflow" class="ui-responsive table-stroke">
+	
+  <div data-role="content" data-theme="a">
+	  <table data-role="table" id="table-courses" data-mode="reflow" class="ui-responsive table-stroke">
 			<thead>
 				<tr><!--文件标题-->
 					<th data-priority="2">学号</th>
@@ -95,10 +100,9 @@ function showPosition(position)
 			</thead>
 			<tbody id="table-courses-body"></tbody><!--文件内容-->
 	</table>
-
-  <div data-role="content" data-theme="a">
     <center><p id="demo">点击这个按钮，获得您的坐标：</p></center>
 	<button onclick="getLocation()">试一下</button>
+	<span id="lbs-result"></span>
   </div>
 
   <div data-role="footer" data-theme="c">
