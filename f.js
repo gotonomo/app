@@ -38,7 +38,7 @@ function showPosition(position){
     function(data)
     {
 		console.log(data.result);
-		if("true"==data.result){
+		if(true == data.result){
         alert("定位成功");
 		window.location.reload();
 		}
