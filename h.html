@@ -30,7 +30,13 @@
 		</thead>
 		<tbody id="table-courses-body"></tbody><!--文件内容-->
 	</table>
-
+  <!-- 用于文件上传的表单元素 -->
+  <form name="demoForm" id="demoForm" method="post" enctype="multipart/form-data" 
+ 	action="javascript: uploadAndSubmit();"> 
+ 	<p><b>请选择文件:</b> <input type="file" name="file" /></p> 
+	<textarea name="remark" id="remark" placeholder="请填写备注信息.."></textarea></br>
+ 	<p><input type="submit" value="上传文件" id="submit"/></p> 
+  </form>
   <div data-role="footer" data-theme="c">
     <h1>END</h1>
   </div> 

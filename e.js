@@ -32,7 +32,4 @@ var courses_test = function(obj){
 		'<center><a href="tel:'+obj.data('id')+'">拨打号码</a><br><br>'+
 		'<a href="sms:'+obj.data('id')+'">发送短信</a></center>'
 	);
-	$("a").click(function(){
-			console.log('号码是：' + obj.data('id'));
-		});
 };
