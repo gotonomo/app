@@ -42,17 +42,14 @@ $.post("http://202.116.161.73:6391/query/Ext_LBS_GetMyLastPosition",
     {
         if(data.result == null){
 			alert("无定位记录");
-		}else{leng=data.result.length;//获取result数组长度
-			for(i=0;i<leng;i++){
-					$("#table-courses-body").append(
-						'<tr><td>'+data.result[i][0]+'</td>'+
-						'<td>'+data.result[i][1]+'</td>'+
-						'<td>'+data.result[i][2]+'</td>'+
-						'<td>'+data.result[i][3]+'</td>'+
-						'<td>'+data.result[i][4]+'</td>'+
-						'<td>'+data.result[i][5]+'</td></tr>'
-					);
-			}
+		}else{
+				$("#table-courses-body").append(
+					'<tr><td>'+data.result[0]+'</td>'+
+					'<td>'+data.result[1]+'</td>'+
+					'<td>'+data.result[2]+'</td>'+
+					'<td>'+data.result[3]+'</td>'+
+					'<td>'+data.result[4]+'</td></tr>'
+				);
 		}
     }
       //返回类型
@@ -61,14 +58,33 @@ $.post("http://202.116.161.73:6391/query/Ext_LBS_GetMyLastPosition",
 
 function showPosition(position){
 	$.mobile.loading( "hide" );
-	$("#lbs-result").html("纬度: " + position.coords.latitude + "<br />经度: " + position.coords.longitude);	
+	//$("#lbs-result").html("纬度: " + position.coords.latitude + "<br />经度: " + position.coords.longitude);	
 	//TODO: 上传坐标
+	$.post("http://202.116.161.73:6391/query/Ext_LBS_SaveMyPosition",
+    {//参数
+      strUserNumber:localStorage.getItem("number"),
+      strSession:sessionStorage.getItem("sess"),
+	  Longitude:position.coords.longitude,
+	  Latitude:position.coords.latitude,
+	  strRemark:remarkmes
+    },//回调函数
+    function(data)
+    {
+		console.log(data.result);
+		if("true"==data.result){
+        alert("定位成功");
+		window.location.reload();
+		}
+    }
+      //返回类型
+	,"json");
 }
 function showError(){
 	$.mobile.loading( "hide" );
 	$("#lbs-result").html("我们在获取坐标时遇到了错误，请重试");
 }
 function getLocation(){
+	remarkmes=$("#remark").val();
 	$.mobile.loading( "show", {
         text: "请稍候……",
         textVisible: true,
@@ -94,7 +110,7 @@ function getLocation(){
   <div data-role="content" data-theme="a">
 	  <table data-role="table" id="table-courses" data-mode="reflow" class="ui-responsive table-stroke">
 			<thead>
-				<tr><!--文件标题-->
+				<tr><!--标题-->
 					<th data-priority="2">学号</th>
 					<th>时间</th>
 					<th data-priority="1">经度</th>
@@ -102,8 +118,10 @@ function getLocation(){
 					<th data-priority="4">备注</th>
 				</tr>
 			</thead>
-			<tbody id="table-courses-body"></tbody><!--文件内容-->
+			<tbody id="table-courses-body"></tbody><!--内容-->
 	</table>
+	<label for="remark">备注信息：</label></br>
+    <textarea name="remark" id="remark" placeholder="请填写备注信息.."></textarea></br>
     <center><p id="demo">点击这个按钮，获得您的坐标：</p></center>
 	<button onclick="getLocation()">试一下</button>
 	<span id="lbs-result"></span>
