@@ -1,24 +1,22 @@
 $(document).on("pageinit",function(){
-$.post("http://202.116.161.73:6391/query/Ext_File_DeleteFile",
+$.post("http://202.116.161.73:6391/query/Ext_File_QueryMyFiles",
     {//参数
       strUserNumber:localStorage.getItem("number"),
       strSession:sessionStorage.getItem("sess")
     },//回调函数
     function(data,status)
     {
-		if(data.result == "文件不存在或不具备对应权限"){
-			alert(data.result)
-		}else{leng=data.result.length;//获取result数组长度
-			for(i=0;i<leng;i++){
-					$("#table-courses-body").append(
-						'<tr><td>'+data.result[i][0]+'</td>'+
-						'<td>'+data.result[i][1]+'</td>'+
-						'<td>'+data.result[i][2]+'</td>'+
-						'<td>'+data.result[i][3]+'</td>'+
-						'<td>'+data.result[i][4]+'</td>'+
-						'<td>'+data.result[i][5]+'</td></tr>'
-					);
-			}
+		console.log(data.result);
+		leng=data.result.length;//获取result数组长度
+		for(i=0;i<leng;i++){
+				$("#table-courses-body").append(
+					'<tr><td>'+data.result[i][0]+'</td>'+
+					'<td>'+data.result[i][1]+'</td>'+
+					'<td>'+data.result[i][2]+'</td>'+
+					'<td>'+data.result[i][3]+'</td>'+
+					'<td>'+data.result[i][4]+'</td>'+
+					'<td>'+data.result[i][5]+'</td></tr>'
+				);
 		}
 	}
       //返回类型
@@ -54,7 +52,7 @@ var reader = new FileReader();
 	
 $("#submit").click(function(){
 	remarkmes=$("#remark").val();
-	$.post("http://202.116.161.73:6391/query/Ext_File_DeleteFile",
+	$.post("http://202.116.161.73:6391/query/Ext_File_UploadFile",
     {//参数
       strUserNumber:localStorage.getItem("number"),
       strSession:sessionStorage.getItem("sess"),
