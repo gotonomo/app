@@ -66,4 +66,4 @@ $("#submit").click(function(){
 	}
       //返回类型
 	,"json");
-});
+})
