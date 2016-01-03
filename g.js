@@ -1,0 +1,12 @@
+$(document).on("pageinit",function(){
+$.post("http://202.116.161.73:6391/query/Ext_File_GetMyCapacity",
+    {//参数
+      strUserNumber:localStorage.getItem("number"),
+      strSession:sessionStorage.getItem("sess")
+    },//回调函数
+    function(data,status){//显示数据
+        $("p").text(data.result);
+    }
+      //返回类型
+	,"json");
+})

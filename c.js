@@ -1,0 +1,29 @@
+
+$(document).on("pageinit",function(){
+$.post("http://202.116.161.73:6391/query/Sys_GetMyHomeWorkDetails",
+    {//参数
+      strUserNumber:localStorage.getItem("number"),
+      strSession:sessionStorage.getItem("sess")
+    },//回调函数
+    function(data,status)
+    {
+    leng=data.result.length;//获取result数组长度
+	for(i=0;i<leng;i++){
+		  		$("#table-courses-body").append(
+					'<tr><td>'+data.result[i][0]+'</td>'+
+					'<td>'+data.result[i][1]+'</td>'+
+					'<td>'+data.result[i][2]+'</td>'+
+					'<td>'+data.result[i][3]+'</td>'+
+					'<td>'+data.result[i][4]+'</td>'+
+					'<td>'+data.result[i][5]+'</td>'+
+					'<td>'+data.result[i][6]+'</td>'+
+					'<td>'+data.result[i][7]+'</td>'+
+					'<td>'+data.result[i][8]+'</td>'+
+					'<td>'+data.result[i][9]+'</td>'+
+					'<td>'+data.result[i][10]+'</td></tr>'
+				);
+			}
+	}
+      //返回类型
+	,"json");
+})
