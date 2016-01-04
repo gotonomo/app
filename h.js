@@ -43,27 +43,26 @@ var reader = new FileReader();
     				console.log(window.btoa(reader.result)); //window.btoa(reader.result) 文件的base64编码
 				} 
 			} 
-
+			//上传文件
+			remarkmes=$("#remark").val();
+			$.post("http://202.116.161.73:6391/query/Ext_File_UploadFile",
+			{//参数
+			  strUserNumber:localStorage.getItem("number"),
+			  strSession:sessionStorage.getItem("sess"),
+			  strFileName:file.name,
+			  strDesc:remarkmes,
+			  bytesBase64:window.btoa(reader.result)
+			},//回调函数
+			function(data,status)
+			{
+				alert(data.result);
+			}
+			  //返回类型
+			,"json");
+			
 			reader.readAsBinaryString(file); 
 		} else { 
 			alert ("Please choose a file."); 
 		} 
 	}
 	
-$("#submit").click(function(){
-	remarkmes=$("#remark").val();
-	$.post("http://202.116.161.73:6391/query/Ext_File_UploadFile",
-    {//参数
-      strUserNumber:localStorage.getItem("number"),
-      strSession:sessionStorage.getItem("sess"),
-	  strFileName:file.name,
-	  strDesc:remarkmes,
-	  bytesBase64:window.btoa(reader.result)
-    },//回调函数
-    function(data,status)
-    {
-		alert(data.result);
-	}
-      //返回类型
-	,"json");
-})
