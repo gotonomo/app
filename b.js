@@ -13,11 +13,12 @@ $.post("http://202.116.161.73:6391/query/Sys_GetMyCourseIDs",
 	for(i=0;i<leng;i++){
 		$("ul").append(
 		'<li data-id='+data.result[i]+'><a href="#" ><h2><center>'+data.result[i]+'</center></h2></a></li>'
-		)}
-		$("ul li").click(function(){
-			courses_test($(this));
-			return false;
-		});
+		)
+	}
+	$("ul li").click(function(){
+		courses_test($(this));
+		return false;
+	});
 	$("ul").listview( "refresh" );
 	}
     //返回类型
