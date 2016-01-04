@@ -16,7 +16,7 @@ $.post("http://202.116.161.73:6391/query/Ext_File_QueryMyFiles",
 					'<td>'+data.result[i][3]+'</td>'+
 					'<td>'+data.result[i][4]+'</td>'+
 					'<td>'+data.result[i][5]+'</td>'+
-					'<td><a id="'+data.result[i][0]+'" href="#">删除文件</a></td></tr>'
+					'<td><a data-id="'+data.result[i][0]+'" href="#">删除文件</a></td></tr>'
 				);
 		}
 		$("#table-courses-body a").click(function(){
