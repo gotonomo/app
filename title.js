@@ -22,4 +22,9 @@ if(sessionStorage.getItem("sess").length<29){
 //后退事件
 $(document).ready(function(){
    $(".back").click(function(){window.location.href="javascript:history.go(-1);";}) 
+   $(".out").click(function(){
+		localStorage.clear();
+		sessionStorage.clear();
+		window.location.href="login.html";
+	}
 })

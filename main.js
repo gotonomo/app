@@ -38,6 +38,11 @@ $(document).on("pageinit",function(){
 
 $(document).ready(function(){
 	$(".back").click(function(){window.location.href="login.html";}) 
+	$(".out").click(function(){
+		localStorage.clear();
+		sessionStorage.clear();
+		window.location.href="login.html";
+	}
 	$("#a").click(function(){window.location.href="a.html";})
 	$("#b").click(function(){window.location.href="b.html";})
 	$("#c").click(function(){window.location.href="c.html";})
