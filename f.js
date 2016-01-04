@@ -1,6 +1,6 @@
 
 $(document).on("pageinit",function(){
-$.post("http://202.116.161.73:6391/query/Ext_LBS_GetMyLastPosition",
+$.post("http://202.116.161.73:6391/query/Ext_LBS_GetMyLastPosition",//得到最后一次经纬度
     {//参数
       strUserNumber:localStorage.getItem("number"),
       strSession:sessionStorage.getItem("sess")
@@ -27,7 +27,7 @@ function showPosition(position){
 	$.mobile.loading( "hide" );
 	//$("#lbs-result").html("纬度: " + position.coords.latitude + "<br />经度: " + position.coords.longitude);	
 	//TODO: 上传坐标
-	$.post("http://202.116.161.73:6391/query/Ext_LBS_SaveMyPosition",
+	$.post("http://202.116.161.73:6391/query/Ext_LBS_SaveMyPosition",//存储经纬度
     {//参数
       strUserNumber:localStorage.getItem("number"),
       strSession:sessionStorage.getItem("sess"),

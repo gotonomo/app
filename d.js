@@ -1,6 +1,5 @@
-
 $(document).on("pageinit",function(){
-$.post("http://202.116.161.73:6391/query/Sys_GetMyHomeWorkIDs",
+$.post("http://202.116.161.73:6391/query/Sys_GetMyHomeWorkIDs",//作业ID
     {//参数
       strUserNumber:localStorage.getItem("number"),
       strSession:sessionStorage.getItem("sess")

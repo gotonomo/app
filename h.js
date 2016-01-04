@@ -16,6 +16,7 @@ $.post("http://202.116.161.73:6391/query/Ext_File_QueryMyFiles",
 					'<td>'+data.result[i][3]+'</td>'+
 					'<td>'+data.result[i][4]+'</td>'+
 					'<td>'+data.result[i][5]+'</td>'+
+					'<td>'+data.result[i][6]+'</td>'+
 					'<td><a data-id="'+data.result[i][0]+'" href="#">删除文件</a></td></tr>'
 				);
 		}
@@ -39,17 +40,15 @@ var courses_test = function(obj){
 		function(data,status)
 		{
 			alert(data.result);
+			window.location.reload();
 		}
 		//返回类型
 		,"json");
-	//window.location.reload();
 };
-
-var reader = new FileReader();
 
 function uploadAndSubmit() { 
 	var form = document.forms["demoForm"]; 
-
+	
 	if (form["file"].files.length > 0) { 
  		// 寻找表单域中的 <input type="file" ... /> 标签
  		var file = form["file"].files[0]; 
@@ -99,43 +98,9 @@ function uploadAndSubmit() {
 								default:alert("异常错误");
 									break;
 							}
-						}
+						}window.location.reload();
 					}
 				});
-				/*$.post("http://202.116.161.73:6391/query/Ext_File_UploadFile",
-				{//参数
-				  strUserNumber:localStorage.getItem("number"),
-				  strSession:sessionStorage.getItem("sess"),
-				  strFileName:file.name,
-				  strDesc:remarkmes,
-				  bytesBase64:window.btoa(reader.result)
-				},//回调函数
-				function(data,status)
-				{
-					console.log(data.result);
-					if(data.result>0){
-						alert("文件编号是"+data.result);
-					}else{
-						switch(data.result){
-							case -1:alert("函数调用错误");
-								break;
-							case -2:alert("MD5值已经存在");
-								break;
-							case -3:alert("函数调用异常");
-								break;
-							case -4:alert("接口调用错误");
-								break;
-							case -5:alert("接口调用异常");
-								break;
-							case -100:alert("上传文件容量超出可使用空间（初始每个账号只允许最多上传200M内容）");
-								break;
-							default:alert("异常错误");
-								break;
-						}
-					}
-				}
-				  //返回类型
-				,"json");*/
 			} 
 		} 
 		

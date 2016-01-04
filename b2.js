@@ -1,6 +1,5 @@
-
 $(document).on("pageinit",function(){
-$.post("http://202.116.161.73:6391/query/Sys_GetMyCourseDetailByID",
+$.post("http://202.116.161.73:6391/query/Sys_GetMyCourseDetailByID",//通过课程ID获取详细课程信息
     {
 	  //参数
       strUserNumber:localStorage.getItem("number"),

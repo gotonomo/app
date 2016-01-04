@@ -1,8 +1,7 @@
-//点击后的事件
 $(document).on("pageinit",function(){
 	//将数据POST到JSON接口
 	$.post(
-		"http://202.116.161.73:6391/query/Sys_GetMyCourseDetail",
+		"http://202.116.161.73:6391/query/Sys_GetMyCourseDetail",//获取课程详细信息
     	{//参数
       		strUserNumber:localStorage.getItem("number"),
       		strSession:sessionStorage.getItem("sess")

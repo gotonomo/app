@@ -1,31 +1,28 @@
-
 $(document).on("pageinit",function(){
-	//获取系统时间
-	$.post(
-		"http://202.116.161.73:6391/query/Sys_GetSystemTime",
-        {//参数
-			strUserNumber:"201230030127"
-    	},//回调函数
-    	function(data,status){
-        	//alert("时间：" + data.result + "\n状态：" + status);
-			strTime=data.result;
-			localStorage.setItem("date",strTime);	    //存登录时间
-    	}
-      	//返回类型
-		,"json"
-	);
   	//判断是否已存账号密码
   	if(localStorage.getItem("log")=="access"){
+		//获取系统时间
+		$.post(
+			"http://202.116.161.73:6391/query/Sys_GetSystemTime",//系统时间
+			{//参数
+				strUserNumber:localStorage.getItem("number")
+			},//回调函数
+			function(data,status){
+				strTime=data.result;
+				localStorage.setItem("date",strTime);	    //存登录时间
+			}
+			//返回类型
+			,"json"
+		);
     	//post账号、密码到JSON接口
     	$.post(
-			"http://202.116.161.73:6391/query/Sys_UserLogin",
+			"http://202.116.161.73:6391/query/Sys_UserLogin",//登录
 			{//参数
         		strUserNumber:localStorage.getItem("number"),
 				strPassWordMd5:localStorage.getItem("psw"),
 				strCurrentDate:localStorage.getItem("date"),
       		},//回调函数
       		function(data,status){
-        		//alert("Session：" + data.result + "\n状态：" + status);//弹出获取到的session
 				//判断登入是否成功
 				if(data.result=="406"){window.location.href="main.html";}
         		if(data.result.length>29){

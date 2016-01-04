@@ -1,6 +1,5 @@
-
 $(document).on("pageinit",function(){
-$.post("http://202.116.161.73:6391/query/Sys_GetMyCourseIDs",
+$.post("http://202.116.161.73:6391/query/Sys_GetMyCourseIDs",//获取课程ID
     {
 	  //参数
       strUserNumber:localStorage.getItem("number"),
@@ -14,7 +13,7 @@ $.post("http://202.116.161.73:6391/query/Sys_GetMyCourseIDs",
 		$("ul").append(
 		'<li data-id='+data.result[i]+'><a href="#" ><h2><center>'+data.result[i]+'</center></h2></a></li>'
 		)
-	}
+	}//点击事件
 	$("ul li").click(function(){
 		courses_test($(this));
 		return false;
@@ -24,6 +23,7 @@ $.post("http://202.116.161.73:6391/query/Sys_GetMyCourseIDs",
     //返回类型
 	,"json");
 })
+//通过课程ID获取详细信息
 var courses_test = function(obj){
 	sessionStorage.setItem("coid",obj.data('id'))//存课程编号
 	console.log('课程编号是：' + obj.data('id'));

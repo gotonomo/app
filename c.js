@@ -1,6 +1,5 @@
-
 $(document).on("pageinit",function(){
-$.post("http://202.116.161.73:6391/query/Sys_GetMyHomeWorkDetails",
+$.post("http://202.116.161.73:6391/query/Sys_GetMyHomeWorkDetails",//获取作业详细信息
     {//参数
       strUserNumber:localStorage.getItem("number"),
       strSession:sessionStorage.getItem("sess")

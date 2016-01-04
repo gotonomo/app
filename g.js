@@ -1,5 +1,5 @@
 $(document).on("pageinit",function(){
-$.post("http://202.116.161.73:6391/query/Ext_File_GetMyCapacity",
+$.post("http://202.116.161.73:6391/query/Ext_File_GetMyCapacity",//得到剩余容量
     {//参数
       strUserNumber:localStorage.getItem("number"),
       strSession:sessionStorage.getItem("sess")
