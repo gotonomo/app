@@ -10,26 +10,27 @@ $(document).on("pageinit",function(){
 			function(data,status){
 				strTime=data.result;
 				localStorage.setItem("date",strTime);	    //存登录时间
+				//post账号、密码到JSON接口
+				$.post(
+					"http://202.116.161.73:6391/query/Sys_UserLogin",//登录
+					{//参数
+						strUserNumber:localStorage.getItem("number"),
+						strPassWordMd5:localStorage.getItem("psw"),
+						strCurrentDate:localStorage.getItem("date"),
+					},//回调函数
+					function(data,status){
+						//判断登入是否成功
+						if(data.result=="406"){window.location.href="main.html";}
+						if(data.result.length>29){
+							sessionStorage.setItem("sess",data.result)
+						};//存session
+					}
+				)
 			}
 			//返回类型
 			,"json"
 		);
-    	//post账号、密码到JSON接口
-    	$.post(
-			"http://202.116.161.73:6391/query/Sys_UserLogin",//登录
-			{//参数
-        		strUserNumber:localStorage.getItem("number"),
-				strPassWordMd5:localStorage.getItem("psw"),
-				strCurrentDate:localStorage.getItem("date"),
-      		},//回调函数
-      		function(data,status){
-				//判断登入是否成功
-				if(data.result=="406"){window.location.href="main.html";}
-        		if(data.result.length>29){
-        			sessionStorage.setItem("sess",data.result)
-				};//存session
-      		}
-    	)
+    	
   	}else{window.location.href="login.html";}
 }); 
 
