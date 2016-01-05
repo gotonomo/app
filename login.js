@@ -29,7 +29,7 @@ $(document).ready(function(){
 						if(data.result.length>29){
 							sessionStorage.setItem("sess",data.result);  //存session
 							localStorage.setItem("log","access");	      //存正确账号密码的标记
-							window.location.href="main.html";
+							window.location.href="index.html";
 						}
 					}//返回类型
 					,"json"

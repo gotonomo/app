@@ -20,7 +20,7 @@ $(document).on("pageinit",function(){
 					},//回调函数
 					function(data,status){
 						//判断登入是否成功
-						if(data.result=="406"){window.location.href="main.html";}
+						if(data.result=="406"){window.location.href="index.html";}
 						if(data.result.length>29){
 							sessionStorage.setItem("sess",data.result)
 						};//存session
